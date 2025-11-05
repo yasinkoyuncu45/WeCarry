@@ -1,0 +1,16 @@
+﻿@model int
+@*
+  Model = okunmamış toplam (int)
+  NEDEN burada <a> render ediyoruz?
+  Çünkü layout'ta <li> içine koyup, komple link+rozet bileşeni olarak kullanmak istiyoruz.
+*@
+<a class="nav-link position-relative" href="/Chat/Inbox">
+    Mesajlar
+    @if (Model > 0)
+    {
+        <span id="unreadBadge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            @Model
+        </span>
+    }
+</a>

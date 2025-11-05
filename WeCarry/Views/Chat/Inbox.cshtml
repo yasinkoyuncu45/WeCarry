@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WeCarry.Models.MVVM.InboxItemVM>
+@{
+    Layout = "~/Views/Shared/DefaultLayout.cshtml";
+    var active = (ViewBag.Tab != "archived");
+}
+
+<div class="container py-4">
+    <h5 class="mb-3">Mesajlarım</h5>
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link @(active ? "active" : "")" href="/Chat/Inbox?tab=active">Aktif</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(!active ? "active" : "")" href="/Chat/Inbox?tab=archived">Arşiv</a>
+        </li>
+    </ul>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-light border">Bu sekmede sohbet yok.</div>
+    }
+    else
+    {
+        <div class="list-group list-group-flush">
+            @foreach (var i in Model)
+            {
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   href="/Chat/Room/@i.ConversationID">
+                    <div>
+                        <div class="fw-bold">@i.OtherUserName</div>
+                        <div class="small text-muted">İlan: @i.AdTitle</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
+                        @if (i.Unread > 0)
+                        {
+                            <span class="badge bg-danger mb-1">@i.Unread</span>
+                        }
+                        <span class="small text-muted">@i.LastMessageAt.ToLocalTime()</span>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>

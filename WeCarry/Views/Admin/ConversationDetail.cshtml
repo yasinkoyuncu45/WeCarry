@@ -1,0 +1,62 @@
+﻿@model WeCarry.Models.MVVM.Conversation
+@{
+    ViewData["Title"] = "Konuşma Detayı";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    .chat-box { max-width: 900px; margin: 0 auto; }
+    .msg {
+        padding: .6rem .8rem;
+        border-radius: 14px;
+        margin-bottom: .4rem;
+        display: inline-block;
+        max-width: 75%;
+        word-break: break-word;
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+    .msg-left  { background:#f1f3f5; }
+    .msg-right { background:#e7f5ff; float:right; }
+    .msg-meta  { font-size: .75rem; color:#6c757d; margin-top: .15rem; }
+    .msg-row::after { content:""; display:block; clear:both; }
+</style>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <i class="fas fa-envelope me-1"></i> Konuşma #@Model.ConversationID
+        </div>
+        <div class="small text-muted">
+            İlan: @Model.AdID — @Model.Ad?.AdvertisementText
+            | Başlatan: @Model.StarterUser.Name
+            | Sahibi: @Model.OwnerUser.Name
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="chat-box">
+            @if (Model.Messages == null || !Model.Messages.Any())
+            {
+                <div class="alert alert-info">Bu konuşmada henüz mesaj yok.</div>
+            }
+            else
+            {
+                foreach (var m in Model.Messages)
+                {
+                    // örnek: ilan sahibi solda, diğer kullanıcı sağda
+                    var isLeft = m.SenderUser.Name == Model.OwnerUser.Name;
+
+                    <div class="msg-row mb-2">
+                        <div class="msg @(isLeft ? "msg-left" : "msg-right")">
+                            <div class="fw-semibold">
+                                Kullanıcı: @m.SenderUser.Name
+                            </div>
+                            <div>@m.Body</div>
+                            <div class="msg-meta">@m.CreatedAt.ToString("dd.MM.yyyy HH:mm")</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

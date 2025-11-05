@@ -1,0 +1,70 @@
+﻿/* wwwroot/css/navbar-user.css */
+
+/* Link tıklanabilir alan */
+.navbar .nav-link {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+/* Mobil (xs) */
+@media (max-width:575.98px) {
+    #userDropdown .user-name {
+        display: none;
+    }
+
+    #userDropdown .bi {
+        font-size: 1rem !important;
+    }
+
+    .login-text {
+        display: none;
+    }
+
+    .login-icon {
+        font-size: 1rem !important;
+    }
+
+    .dropdown-menu {
+        min-width: 12rem;
+    }
+
+    .dropdown-item {
+        padding: .5rem .75rem;
+        font-size: .925rem;
+    }
+}
+
+/* Tablet (sm–md) */
+@media (min-width:576px) and (max-width:991.98px) {
+    #userDropdown .bi {
+        font-size: 1.05rem !important;
+    }
+
+    #userDropdown .user-name {
+        font-size: .9rem;
+    }
+
+    .dropdown-menu {
+        min-width: 13rem;
+    }
+
+    .login-text {
+        display: inline;
+        font-size: .9rem;
+    }
+
+    .login-icon {
+        font-size: 1.05rem !important;
+    }
+}
+
+/* Desktop (lg+) */
+@media (min-width:992px) {
+    #userDropdown .bi {
+        font-size: 1.05rem !important;
+    }
+
+    .login-icon {
+        font-size: 1.05rem !important;
+    }
+}

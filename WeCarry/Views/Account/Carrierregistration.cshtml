@@ -1,0 +1,87 @@
+﻿@using WeCarry.Models.MVVM
+@model User
+@{
+    ViewData["Title"] = "Taşıyıcı Kayıt";
+    Layout = "~/Views/Shared/DefaultLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5 shadow-sm">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Taşıyıcı Ol</h1>
+                <p class="lead text-muted">Tır veya çekici hizmeti veriyorsanız, hesabınızı hemen oluşturun.</p>
+            </div>
+
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <!-- ✅ Artık AccountController’a yönlendiriyoruz -->
+                    <form asp-controller="Account" asp-action="CarrierRegistration" method="post">
+                        <div class="mb-3 fw-bold">Hizmet Türünüz</div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="ServiceTypeID" id="TruckService" value="1">
+                            <label class="form-check-label" for="TruckService">Tır Hizmeti Vermek İstiyorum</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" asp-for="ServiceTypeID" id="TowTruckService" value="2">
+                            <label class="form-check-label" for="TowTruckService">Çekici Hizmeti Vermek İstiyorum</label>
+                        </div>
+                        <span asp-validation-for="ServiceTypeID" class="text-danger"></span>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Name" placeholder="Adınız..." />
+                            <label asp-for="Name">Adınız</label>
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Surname" placeholder="Soyadınız..." />
+                            <label asp-for="Surname">Soyadınız</label>
+                            <span asp-validation-for="Surname" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Email" placeholder="name@example.com" />
+                            <label asp-for="Email">E-posta</label>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Password" type="password" placeholder="Şifreniz..." />
+                            <label asp-for="Password">Şifre</label>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Telephone" placeholder="(5xx) xxx xx xx" />
+                            <label asp-for="Telephone">Telefon</label>
+                            <span asp-validation-for="Telephone" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Firm" placeholder="Firma Adı..." />
+                            <label asp-for="Firm">Firma Adı</label>
+                            <span asp-validation-for="Firm" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input class="form-control" asp-for="Address" placeholder="Adres..." />
+                            <label asp-for="Address">Fatura Adresi</label>
+                            <span asp-validation-for="Address" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="bi bi-person-plus me-2"></i> Kayıt Ol
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

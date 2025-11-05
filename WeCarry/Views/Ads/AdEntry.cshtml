@@ -1,0 +1,87 @@
+﻿@model WeCarry.Models.MVVM.Ads
+@{
+    ViewData["Title"] = "Yeni İlan Oluştur";
+    Layout = "~/Views/Shared/DefaultLayout.cshtml";
+}
+
+<div class="container py-5 d-flex justify-content-center">
+    <div class="card shadow-sm border-0" style="max-width: 800px; width: 100%;">
+        <div class="card-header bg-primary text-white d-flex align-items-center">
+            <i class="bi bi-megaphone-fill me-2"></i>
+            <h5 class="mb-0">Yeni İlan Oluştur</h5>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="AdEntry" method="post">
+                <div class="row g-3">
+                    <!-- Hizmet Türü -->
+                    <div class="col-md-6">
+                        <label asp-for="ServiceTypeID" class="form-label">
+                            <i class="bi bi-truck me-1"></i> Hizmet Türü
+                        </label>
+                        <select asp-for="ServiceTypeID" class="form-select">
+                            <option value="">Seçiniz</option>
+                            <option value="1">Tır</option>
+                            <option value="2">Çekici</option>
+                        </select>
+                        <span asp-validation-for="ServiceTypeID" class="text-danger small"></span>
+                    </div>
+
+                    <!-- KM Ücreti -->
+                    <div class="col-md-6">
+                        <label asp-for="KmFee" class="form-label">
+                            <i class="bi bi-cash-coin me-1"></i> KM Ücreti
+                        </label>
+                        <div class="input-group">
+                            <input asp-for="KmFee" class="form-control" placeholder="Örn: 3.00" />
+                            <span class="input-group-text">TL/km</span>
+                        </div>
+                        <span asp-validation-for="KmFee" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="FoundCity" class="form-label">
+                            <i class="bi bi-geo-alt me-1"></i> Çıkış Noktası
+                        </label>
+                        <select asp-for="FoundCity" class="form-select" asp-items="ViewBag.CityList">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="FoundCity" class="text-danger small"></span>
+                    </div>
+
+
+                    <!-- Varış Noktası -->
+                    <div class="col-md-6">
+                        <label asp-for="DestinationCity" class="form-label">
+                            <i class="bi bi-flag me-1"></i> Varış Noktası
+                        </label>
+                        <select asp-for="DestinationCity" class="form-select" asp-items="ViewBag.CityList">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="DestinationCity" class="text-danger small"></span>
+                    </div>
+
+
+                    <!-- Açıklama -->
+                    <div class="col-12">
+                        <label asp-for="AdvertisementText" class="form-label">
+                            <i class="bi bi-info-circle me-1"></i> Açıklama
+                        </label>
+                        <textarea asp-for="AdvertisementText" class="form-control" rows="4" placeholder="Taşıma detaylarını buraya yazabilirsiniz..."></textarea>
+                        <span asp-validation-for="AdvertisementText" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end">
+                    <button type="submit"  class="btn btn-success px-4">
+                        <i class="bi bi-plus-circle me-1"></i> İlanı Oluştur
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,69 @@
+﻿@model WeCarry.Models.MVVM.User
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/DefaultLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+            <div class="text-center mb-4">
+                <h1 class="fw-bolder">Giriş Yapınız</h1>
+                <p class="text-muted">Lütfen e-posta ve şifrenizi giriniz</p>
+            </div>
+
+            @* Genel hata / bilgi mesajı alanı *@
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-@TempData["MessageType"] text-center">
+                    @TempData["Message"]
+                </div>
+            }
+
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <!-- ✅ Controller değişti -->
+                    <form asp-controller="Account" asp-action="Login" method="post" novalidate>
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" asp-for="Email" placeholder="name@example.com" />
+                            <label asp-for="Email">Email</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" asp-for="Password" placeholder="Şifreniz..." />
+                            <label asp-for="Password">Şifre</label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="bi bi-box-arrow-in-right me-1"></i> Giriş Yap
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <a asp-controller="Account" asp-action="ForgotPassword" class="text-decoration-none">
+                                Şifremi Unuttum?
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Henüz hesabınız yok mu?</span>
+                            <a asp-controller="Account" asp-action="Register" class="fw-bold text-decoration-none ms-1">
+                                Kayıt Ol
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
