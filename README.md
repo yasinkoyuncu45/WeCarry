@@ -8,8 +8,8 @@ A scalable logistics platform connecting customers with carriers via web and mob
 
 ## 📸 Screenshots
 
-![Home](assets/images/home.png)
-![Dashboard](assets/images/dashboard.png)
+![Home](assets/images)
+
 
 
 ## 🔒 Source Code
